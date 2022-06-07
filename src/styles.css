@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; font-size: 62.5%;}
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  /* background-color: #92aca0;  */
+  background-color: #dde5ed; 
+
+  overflow-y: scroll;
+}
+
+/* 未访问链接 */
+a:link {
+  /* color: rgb(105, 97, 84); */
+  color: #3e5d58;
+}
+
+/* 已访问链接 */
+a:visited {
+  color: #3e5d58;
+}
+
+/* 鼠标移动到链接上 */
+a:hover {
+  color: #92aca0;
+}
+
+/* 鼠标点击时 */
+a:active {
+  color: #dde5ed;
+}
+

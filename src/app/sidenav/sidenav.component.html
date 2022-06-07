@@ -1,0 +1,9 @@
+<div class="sidenav">
+  <div class="sidenav-item" *ngFor="let sidenavItem of sidenavItemList" mat-ripple>
+    <a [href]="sidenavItem.path">
+    <!-- <a [routerLink]="sidenavItem.path"> -->
+      <!-- <mat-icon>{{sidenavItem.icon}}</mat-icon> -->
+      <span>{{sidenavItem.name}}</span>
+    </a>
+  </div>
+</div>

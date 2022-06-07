@@ -1,0 +1,82 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+$botanical: (
+  darkGreen: #3e5d58,
+  oldLight: #829796,
+  lightGreen: #92aca0,
+  standard: #dde5ed,
+  sand: #d2cfc7,
+  padLight: #d3e9ea,
+  padDark: #29413c,
+  leaf: #496977,
+  unknown: #92a
+);
+
+$botanical-palette: (
+  50: #e7f2ee,
+  100: #cedcd4,
+  200: #b0c4bb,
+  300: #92aca0,
+  400: #7b998b,
+  500: #658778,
+  600: #597769,
+  700: #486257,
+  800: #394f46,
+  900: #3e5d58,
+  A100: #cedcd4,
+  A200: #b0c4bb,
+  A400: #7b998b,
+  A700: #486257,
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: #92aca0,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+
+// $static-blog-primary: mat.define-palette(mat.$indigo-palette);
+$static-blog-primary: mat.define-palette($botanical-palette, 900);
+// $static-blog-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$static-blog-accent: mat.define-palette($botanical-palette, A400, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$static-blog-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$static-blog-theme: mat.define-light-theme((
+  color: (
+    primary: $static-blog-primary,
+    accent: $static-blog-accent,
+    warn: $static-blog-warn,
+  )
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($static-blog-theme);
+

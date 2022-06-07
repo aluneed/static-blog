@@ -1,0 +1,64 @@
+.toolbar {
+  display: flex;
+  box-sizing: border-box;
+  /* flex-direction: column; */
+  width: 100%;
+
+  position: fixed;
+  /* top: 0;
+  right: 0;
+  left: 0; */
+  z-index: 10;
+
+  box-shadow: 0 2px 5px #0000004d;
+}
+
+.side-nav {
+  display: block;
+
+  position: fixed;
+  top: 64px;
+
+  /* overflow-y: scroll; */
+
+  z-index: 9;
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 30%);
+
+  background-color: #d2cfc7;
+
+}
+
+.main-container {
+  background-color: #dad8d3;
+  display: block;
+
+  margin: 0 auto;
+  max-width: 1080px;
+  padding: 96px 0px 32px 0;
+
+  margin-bottom: 64px;
+  
+  overflow-x: auto;
+
+  box-shadow: 0 2px 5px 0 rgb(0 0 0 / 30%);
+  border-radius: 4px; 
+
+  font-family: 'Cascadia Code Extralight';
+  font-size: 1.6rem;
+  line-height: 3.2rem;
+
+  opacity: 1;
+  transition: all 200ms ease-in-out 200ms;
+}
+
+.side-column {
+  display: block;
+  position: fixed;
+  right: 0;
+  top: 120px;
+  overflow-x: hidden;
+}
+
+.mat-sidenav-content {
+  background-color: #dde5ed;
+}
