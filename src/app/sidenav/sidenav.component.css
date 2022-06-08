@@ -1,16 +1,15 @@
 .sidenav-item {
   display: block;
   cursor: pointer;
-  font-size: 32px;
-
-  padding: 16px;
-  /* margin: 16px; */
+  font-size: 3.2rem;
 
   font-family: 'Cascadia Code Extralight';
 
 }
 
 .sidenav-item a {
+  display: block;
+  padding: 16px;  /*padding可以点击 margin不行*/
   text-decoration: none;
 }
 
