@@ -19,6 +19,15 @@ export class PageService {
 
   selectTag(tag: Tag): void {
     this.tagsSelected.set(tag.name, true);
+    this.updateContentList();
+  }
+
+  deselectTag(tag: Tag): void {
+    this.tagsSelected.set(tag.name, false);
+    this.updateContentList();
+  }
+
+  updateContentList(): void {
     this.pageContentList = this.pageContentList
       .filter(content => content.tags.some(tag => this.tagsSelected.get(tag) == true))
   }

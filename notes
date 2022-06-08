@@ -1,0 +1,4 @@
+直接使用material angular的组件, 会出现字体问题  
+不会使用全局定义的font family, 而是会使用组件自带的`Roboto, "Helvetica Neue", sans-serif`
+
+只有和路由有关的组件才能通过ActivatedRoute获取路由信息?  

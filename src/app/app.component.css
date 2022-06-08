@@ -57,6 +57,7 @@
   right: 0;
   top: 120px;
   overflow-x: hidden;
+  padding: 16px;
 }
 
 .mat-sidenav-content {

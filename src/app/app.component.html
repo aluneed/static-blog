@@ -25,7 +25,7 @@
       </main>
 
       <div class="side-column" *ngIf="true">
-        side-pannel
+        <app-pannel></app-pannel>
       </div>
 
     </section>
@@ -40,3 +40,11 @@
 <button class="tag-button" type="button" mat-raised-button>
   Basic button
 </button>
+
+<mat-chip-list aria-label="Fish selection" >
+  <mat-chip>One fish</mat-chip>
+  <mat-chip selected>Two fish</mat-chip>
+  <mat-chip color="primary" >Primary fish</mat-chip>
+  <mat-chip color="primary" selected>Primary fish</mat-chip>
+  <mat-chip color="accent" selected>Accent fish</mat-chip>
+</mat-chip-list>

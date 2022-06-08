@@ -3,7 +3,7 @@
     <a [routerLink]="['/blog', contentMeta.path]"
       [title]="contentMeta.title"
       >
-      <h1 class="title">{{ contentMeta.title }}</h1>
+      {{ contentMeta.title }}
     </a>
     <p>{{contentMeta.date}}</p>
   </div>
