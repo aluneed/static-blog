@@ -14,7 +14,7 @@ export class ContentListComponent implements OnInit {
     private pageService: PageService
   ) {}
 
-  contentIndex: ContentMeta[] = contentIndex;
+  contentIndex: ContentMeta[] = this.pageService.indexBuffer;
 
   pageIndexList: string[] = [];
 
@@ -23,7 +23,7 @@ export class ContentListComponent implements OnInit {
   pageCount = 1;
 
   ngOnInit(): void {
-    this.itemCount = this.contentIndex.length;
+    this.itemCount = this.pageService.pageContentList.length;
     this.pageCount = Math.ceil(this.itemCount / 10);
     this.setCurrentPage(1);
   }
@@ -44,7 +44,6 @@ export class ContentListComponent implements OnInit {
       this.pageIndexList.push(">");
       this.pageIndexList.push(">>");
     }
-    this.contentIndex = this.pageService.getPageContentList(this.currentPage, 10);
   }
 
   jumpPage(page: String) {
@@ -59,7 +58,7 @@ export class ContentListComponent implements OnInit {
     } else {
       this.setCurrentPage(Number(page));
     }
-    this.contentIndex = this.pageService.getPageContentList(this.currentPage, 10);
+    this.pageService.setCurrentPage(this.currentPage, 10);
   }
 
 }

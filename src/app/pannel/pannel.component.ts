@@ -25,16 +25,12 @@ export class PannelComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  selectTag(tag: Tag): void {
+  clickTag(tag: Tag): void {
     if(this.tagsSelected.get(tag.name)){
-      this.deselectTag(tag);
+      this.pageService.deselectTag(tag);
     } else {
       this.pageService.selectTag(tag);
     }
-  }
-
-  deselectTag(tag: Tag): void {
-    this.pageService.deselectTag(tag);
   }
 
   clearTagsFilter(): void {

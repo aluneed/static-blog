@@ -21,6 +21,18 @@ export const tags: Tag[] = [
     count: 0
   },
   {
+    name: 'kotlin',
+    count: 0
+  },
+  {
+    name: 'scala',
+    count: 0
+  },
+  {
+    name: 'clojure',
+    count: 0
+  },
+  {
     name: 'go',
     count: 0
   },

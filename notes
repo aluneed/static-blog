@@ -2,3 +2,13 @@
 不会使用全局定义的font family, 而是会使用组件自带的`Roboto, "Helvetica Neue", sans-serif`
 
 只有和路由有关的组件才能通过ActivatedRoute获取路由信息?  
+
+
+踩坑: 
+试图通过
+`contentIndex: ContentMeta[] = this.pageService.indexBuffer;`
+来同步indexBuffer的数据
+这里虽然是引用传递, 但是在indexBuffer的处理中并没有对indexBuffer进行操作, 而是直接赋了一个新值, 导致引用发生了变化  
+contentIndex还是老的引用, 因此页面没有发生相应的变化
+
+如果要保持代码整洁, 最好采用subscribe, 或者对indexBuffer进行数组操作

@@ -139,6 +139,46 @@ export const contentIndex: ContentMeta[] = [
     category: 'category1',
     type: 'type1',
     path: 'content2'
-  },
+  }, {
+    id: 17,
+    title: 'java',
+    date: '2020-01-02',
+    tags: ['tag1', 'tag2'],
+    category: 'programming languages',
+    type: 'type1',
+    path: 'content2'
+  }, {
+    id: 18,
+    title: 'kotlin',
+    date: '2020-01-03',
+    tags: ['java', 'kotlin'],
+    category: 'programming languages',
+    type: 'type1',
+    path: 'content2'
+  }, {
+    id: 19,
+    title: 'scala',
+    date: '2020-01-04',
+    tags: ['java', 'scala'],
+    category: 'programming languages',
+    type: 'type1',
+    path: 'content2'
+  },{
+    id: 20,
+    title: 'clojure',
+    date: '2020-01-04',
+    tags: ['java', 'scala', 'clojure'],
+    category: 'programming languages',
+    type: 'type1',
+    path: 'content2'
+  }, {
+    id: 21,
+    title: 'go',
+    date: '2020-01-05',
+    tags: ['java', 'go'],
+    category: 'programming languages',
+    type: 'type1',
+    path: 'content2'
+  }
 
 ]

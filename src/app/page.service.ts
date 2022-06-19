@@ -7,14 +7,18 @@ import { Tag, tags } from './tags';
 })
 export class PageService {
   
-  pageContentList: ContentMeta[] = contentIndex
+  pageContentList: ContentMeta[] = contentIndex.reverse();
   tagsSelected: Map<string, boolean> = new Map();
 
-  pageSize = 10
-  pageNum = 1
+  indexBuffer: ContentMeta[] = [];
+
+  pageSize = 10;
+  pageNum = 1;
+  currentPage = 1;
   
   constructor() {
     tags.forEach(tag => this.tagsSelected.set(tag.name, false));
+    this.setCurrentPage(1, 10);
   }
 
   selectTag(tag: Tag): void {
@@ -29,12 +33,24 @@ export class PageService {
 
   updateContentList(): void {
     this.pageContentList = this.pageContentList
-      .filter(content => content.tags.some(tag => this.tagsSelected.get(tag) == true))
+      .filter(content => content.tags.some(tag => this.tagsSelected.get(tag) == true));
+    this.setCurrentPage(this.pageNum, this.pageSize);
   }
 
   clearTagsFilter(): void {
     this.tagsSelected.forEach((value, key) => this.tagsSelected.set(key, false));
     this.pageContentList = contentIndex;
+    this.setCurrentPage(this.pageNum, this.pageSize);
+  }
+
+  setCurrentPage(pageNum: number, pageSize: number): void {
+    var pageResult = this.getPageContentList(pageNum, pageSize);
+    for(var i = 0; i < pageResult.length; i++) {
+        this.indexBuffer[i] = pageResult[i];
+    }
+    for(var i = pageResult.length; i < pageSize; i++) {
+      this.indexBuffer.pop();
+    }
   }
   
   getPageContentList(pageNum: number, pageSize: number): ContentMeta[] {
