@@ -16,13 +16,23 @@ export class PannelComponent implements OnInit {
   ) { }
 
   flag: boolean = true;
-  type: string = "filter";
 
   tags: Tag[] = tags;
 
   tagsSelected: Map<string, boolean> = this.pageService.tagsSelected;
 
   ngOnInit(): void {
+  }
+
+  //https://stackoverflow.com/questions/72305225/how-do-i-hide-an-agular-component-on-all-routes-that-correspond-to-a-certain-pat
+  public type(): string {
+    if (window.location.pathname.startsWith('/blog/')) {
+      return "index";
+    }
+    if (window.location.pathname.endsWith('blog')) {
+      return "filter";
+    }
+    return "default";
   }
 
   clickTag(tag: Tag): void {

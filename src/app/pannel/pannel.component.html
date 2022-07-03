@@ -1,7 +1,5 @@
 <div class="pannel">
-  <button (click)="type='filter'">filter</button>
-  <button (click)="type='index'">index</button>
-  <div class="tags-filter" *ngIf="type=='filter'">
+  <div class="tags-filter" *ngIf="type()=='filter'">
     <h1>filter</h1>
     <button (click)="clearTagsFilter()">clear</button>
     <mat-chip-list aria-label="tags" [multiple]="true" [selectable]="true">
@@ -12,8 +10,11 @@
       </mat-chip>
     </mat-chip-list>
   </div>
-  <div *ngIf="type=='index'">
+  <div *ngIf="type()=='index'">
     <h1>index</h1>
     false
+  </div>
+  <div *ngIf="type()=='default'">
+    <h1>default pannel</h1>
   </div>
 </div>
