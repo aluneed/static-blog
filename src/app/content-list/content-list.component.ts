@@ -15,50 +15,13 @@ export class ContentListComponent implements OnInit {
   ) {}
 
   contentIndex: ContentMeta[] = this.pageService.indexBuffer;
-
-  pageIndexList: string[] = [];
-
-  currentPage: number = 1;
-  itemCount = 0;
-  pageCount = 1;
+  pageIndexList: string[] = this.pageService.pageIndexList;
 
   ngOnInit(): void {
-    this.itemCount = this.pageService.pageContentList.length;
-    this.pageCount = Math.ceil(this.itemCount / 10);
-    this.setCurrentPage(1);
-  }
-
-  setCurrentPage(page: number): void {
-    this.currentPage = page;
-    this.pageIndexList = [];
-    let min = Math.max(page - 5, 1);
-    let max = Math.min(page + 5, this.pageCount);
-    if (page > 1) {
-      this.pageIndexList.push("<<");
-      this.pageIndexList.push("<");
-    }
-    for (let i = min; i <= max; i++) {
-      this.pageIndexList.push(i.toString());
-    }
-    if (page < this.pageCount) {
-      this.pageIndexList.push(">");
-      this.pageIndexList.push(">>");
-    }
   }
 
   jumpPage(page: String) {
-    if (page == "<<") {
-      this.setCurrentPage(1);
-    } else if (page == "<") {
-      this.setCurrentPage(this.currentPage - 1);
-    } else if (page == ">") {
-      this.setCurrentPage(this.currentPage + 1);
-    } else if (page == ">>") {
-      this.setCurrentPage(this.pageCount);
-    } else {
-      this.setCurrentPage(Number(page));
-    }
-    this.pageService.setCurrentPage(this.currentPage, 10);
+    this.pageService.jumpPage(page);
   }
 
 }
