@@ -17,6 +17,8 @@ import { ContentListComponent } from './content-list/content-list.component';
 import { ContentContainerComponent } from './content-container/content-container.component';
 import { HomeComponent } from './home/home.component';
 import { PannelComponent } from './pannel/pannel.component';
+import { MarkdownModule } from 'ngx-markdown';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { PannelComponent } from './pannel/pannel.component';
     MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatRippleModule
+    MatRippleModule,
+    MarkdownModule.forRoot(),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,10 @@
-<p>content-container works!</p>
-<div>title</div>
+<div class="title">title</div>
 
-<div>md content</div>
-
+<div class="content">
+  content: 
+  <!-- https://github.com/jfcere/ngx-markdown -->
+  <markdown
+    [data]="content"
+  >
+  </markdown>
+</div>

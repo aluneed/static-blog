@@ -146,7 +146,7 @@ export const contentIndex: ContentMeta[] = [
     tags: ['tag1', 'tag2'],
     category: 'programming languages',
     type: 'type1',
-    path: 'content2'
+    path: 'java.md'
   }, {
     id: 18,
     title: 'kotlin',
