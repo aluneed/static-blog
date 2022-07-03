@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   {
-    path: '', redirectTo: 'home', pathMatch: 'full',
+    path: '', redirectTo: 'blog', pathMatch: 'full',
   },
   {
     path: 'home', component: HomeComponent
@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'blog/:path', component: ContentContainerComponent
   },
   {
-    path: '**', redirectTo: 'home'  //404 with chips sad panda in theme colors
+    path: '**', redirectTo: 'blog'  //404 with chips sad panda in theme colors
   }
 ];
 

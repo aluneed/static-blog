@@ -63,3 +63,41 @@
 .mat-sidenav-content {
   background-color: #dde5ed;
 }
+
+.toolbar a {
+  color: #92aca0;
+  /* display: block; */
+  font-size: 3.2rem;
+  padding: 0.4rem;
+  text-decoration: none;
+  border-radius: 0.4rem;
+  font-family: "Cascadia Code Extralight", Roboto, "Helvetica Neue", sans-serif;
+}
+
+.home {
+  margin: 0.2rem;
+  border-radius: 16px;
+}
+
+
+.external{
+    /* display: block; */
+    display: flex;
+    flex-direction: row;
+    /* float: right; */
+
+    flex-shrink: 0;
+    height: 100%;
+    box-sizing: border-box;
+    /* width: 100%; */
+    align-items: center;
+    padding: 0 16px;
+    /* left: 80%; */
+    right: 0;
+    clear: right;
+    /* right: 20%; */
+    overflow: hidden;
+
+    position: absolute;
+    border-radius: 4px;
+  }
