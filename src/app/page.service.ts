@@ -103,18 +103,29 @@ export class PageService {
   deselectTag(tag: Tag): void {
     this.tagsSelected.set(tag.name, false);
     
-    //去掉最后一个选项后需要做特殊处理
-    var tagCount = Array.from(this.tagsSelected.values()).filter(value => value).length;
-    if(tagCount == 0) {
-      this.clearTagsFilter();
-    } else {
+    //or filter 去掉最后一个选项后需要做特殊处理
+    // var tagCount = Array.from(this.tagsSelected.values()).filter(value => value).length;
+    // if(tagCount == 0) {
+      // this.clearTagsFilter();
+    // } else {
       this.updateFilteredContentList();
-    }
+    // }
   }
 
   updateFilteredContentList(): void {
+
+    var selectedTagList: string[] = Array.from(this.tagsSelected.entries())
+      .filter(entry => entry[1] == true)
+      .map(entry => entry[0])
+
     this.filteredContentList = this.contentList
-      .filter(content => content.tags.some(tag => this.tagsSelected.get(tag) == true));  //这里会产生一个新的数组; 数组内的对象引用是一样的?
+      // or
+      // .filter(content => content.tags.some(tag => this.tagsSelected.get(tag) == true));  //这里会产生一个新的数组; 数组内的对象引用是一样的?
+      // and
+      .filter(content => 
+        selectedTagList
+          .every(selectedTag => content.tags.some(contentTag => contentTag == selectedTag))
+      )
     this.pageCount = Math.ceil(this.filteredContentList.length / this.pageSize);
     this.setCurrentPage(1);
   }
