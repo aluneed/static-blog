@@ -11,10 +11,10 @@ import { PageService } from '../page.service';
 export class ContentListComponent implements OnInit {
 
   constructor(
-    private pageService: PageService
+    public pageService: PageService
   ) {}
 
-  contentIndex: ContentMeta[] = this.pageService.indexBuffer;
+  // contentIndex: ContentMeta[] = this.pageService.indexBuffer;
   pageIndexList: string[] = this.pageService.pageIndexList;
 
   ngOnInit(): void {

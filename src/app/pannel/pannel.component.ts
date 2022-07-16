@@ -41,6 +41,7 @@ export class PannelComponent implements OnInit {
     } else {
       this.pageService.selectTag(tag);
     }
+    console.log(this.pageService.tagsSelected);
   }
 
   clearTagsFilter(): void {

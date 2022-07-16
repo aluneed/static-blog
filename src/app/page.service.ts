@@ -16,25 +16,47 @@ export class PageService {
 
   pageSize = 10;
   pageNum = 1;
-  currentPage = 1;
 
   pageCount = 1;
-  tagCount = 0;
   
   constructor() {
     this.pageCount = Math.ceil(this.contentList.length / this.pageSize);
     
-    tags.forEach(tag => this.tagsSelected.set(tag.name, false));
-    this.setCurrentPage(1);
+    // tags.forEach(tag => this.tagsSelected.set(tag.name, false));
+    var tagsSelectedJsonString = sessionStorage.getItem("tagsSelected");
+    console.log(tagsSelectedJsonString);
+    if (tagsSelectedJsonString == null || tagsSelectedJsonString == "{}") {
+      tags.forEach(tag => this.tagsSelected.set(tag.name, false));
+      console.log("refresh" + " branch 1");
+      console.log(this.tagsSelected);
+      console.log(this.indexBuffer);
+    } else {
+      console.log(this.tagsSelected);
+      tagsSelectedJsonString.split(",").forEach(tupleString => {
+        var tuple: string[] = tupleString.split(":");
+        this.tagsSelected.set(tuple[0], tuple[1] == "true");
+      })
+      console.log("refresh" + " branch 2");
+      console.log(this.tagsSelected);
+      console.log(this.indexBuffer);
+    }
+    this.updateFilteredContentList();
+    var currentPage = sessionStorage.getItem("currentPage");
+    this.setCurrentPage(currentPage == null ? 1 : Number(currentPage));
+
+    window.onbeforeunload = () => {
+      this.saveTagsSession();
+      console.log("saved");
+    }
   }
 
   jumpPage(page: String) {
     if (page == "<<") {
       this.setCurrentPage(1);
     } else if (page == "<") {
-      this.setCurrentPage(this.currentPage - 1);
+      this.setCurrentPage(this.getCurrentPage() - 1);
     } else if (page == ">") {
-      this.setCurrentPage(this.currentPage + 1);
+      this.setCurrentPage(this.getCurrentPage() + 1);
     } else if (page == ">>") {
       this.setCurrentPage(this.pageCount);
     } else {
@@ -42,8 +64,12 @@ export class PageService {
     }
   }
 
+  getCurrentPage(): number {
+    return Number(sessionStorage.getItem("currentPage"));
+  }
+
   setCurrentPage(pageNum: number): void {
-    this.currentPage = pageNum;
+    sessionStorage.setItem("currentPage", pageNum.toString());
     this.pageIndexList.splice(0, this.pageIndexList.length);  //pageIndexList的构建可以提前, 然后在这里取slice, 再根据情况在首位添加跳转符号
     let min = Math.max(pageNum - 5, 1);
     let max = Math.min(pageNum + 5, this.pageCount);
@@ -71,15 +97,15 @@ export class PageService {
 
   selectTag(tag: Tag): void {
     this.tagsSelected.set(tag.name, true);
-    this.tagCount++;
     this.updateFilteredContentList();
   }
 
   deselectTag(tag: Tag): void {
     this.tagsSelected.set(tag.name, false);
-    this.tagCount--;
+    
     //去掉最后一个选项后需要做特殊处理
-    if(this.tagCount == 0) {
+    var tagCount = Array.from(this.tagsSelected.values()).filter(value => value).length;
+    if(tagCount == 0) {
       this.clearTagsFilter();
     } else {
       this.updateFilteredContentList();
@@ -97,7 +123,15 @@ export class PageService {
     this.tagsSelected.forEach((value, key) => this.tagsSelected.set(key, false));
     this.filteredContentList = this.contentList;
     this.pageCount = Math.ceil(this.filteredContentList.length / this.pageSize);
-    this.setCurrentPage(1)
+    this.setCurrentPage(1);
+  }
+
+  saveTagsSession(): void {
+    var tagsSelectedString = Array.from(this.tagsSelected.entries())
+      .reduce((accumulated, entry) => {
+        return accumulated + entry[0] + ":" + entry[1] + ",";
+      }, "");
+    sessionStorage.setItem("tagsSelected", tagsSelectedString.substring(0, tagsSelectedString.length - 1));
   }
 
   getPageContentList(pageNum: number, pageSize: number): ContentMeta[] {

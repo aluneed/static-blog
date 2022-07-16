@@ -1,5 +1,5 @@
 <div class="content-list">
-  <div class="content-list-item" *ngFor="let contentMeta of contentIndex">
+  <div class="content-list-item" *ngFor="let contentMeta of this.pageService.indexBuffer">
     <a [routerLink]="['/blog', contentMeta.path]"
       [title]="contentMeta.title"
       >
