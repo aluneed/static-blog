@@ -1,0 +1,16 @@
+.title {
+  display: block;
+  text-align: center;
+
+  padding: 4rem 8rem 8rem 8rem;
+
+  font-size: 3.2rem;
+  font-family: 'Cascadia Code Extralight';
+  color: #3e5d58;
+}
+
+.content {
+  display: block;
+
+  padding: 0rem 12rem 12rem 12rem;
+}

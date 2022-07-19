@@ -39,6 +39,7 @@
   margin-bottom: 64px;
   
   overflow-x: auto;
+  overflow-y: hidden;
 
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 30%);
   border-radius: 4px; 
@@ -46,6 +47,7 @@
   font-family: 'Cascadia Code Extralight';
   font-size: 1.6rem;
   line-height: 3.2rem;
+
 
   opacity: 1;
   transition: all 200ms ease-in-out 200ms;

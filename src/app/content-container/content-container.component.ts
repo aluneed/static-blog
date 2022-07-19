@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { PageService } from '../page.service';
 
 @Component({
   selector: 'app-content-container',
@@ -11,7 +12,8 @@ export class ContentContainerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private http: HttpClient
+    private http: HttpClient,
+    private pageService: PageService
   ) { }
 
   ngOnInit(): void {
@@ -22,9 +24,10 @@ export class ContentContainerComponent implements OnInit {
       this.http.get("assets/posts/" + this.path, {responseType: "text"})
         .subscribe(content => this.content = content)
     }
+    this.title = this.pageService.indexBuffer.find(e => e.path == this.path)?.title!;
   }
 
   path:string|null = "";
   content: string = "# content not found";
-
+  title: string= "title";
 }
