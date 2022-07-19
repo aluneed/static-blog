@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { contentIndex, ContentMeta } from '../content-index';
 import { MatRippleModule } from '@angular/material/core';
 import { PageService } from '../page.service';
 

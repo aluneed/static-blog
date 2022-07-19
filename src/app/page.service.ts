@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { contentIndex, ContentMeta } from './content-index';
+import { contentIndex } from './content-index';
+import { ContentMeta } from './ContentMeta';
 import { Tag, tags } from './tags';
 
 @Injectable({
@@ -7,7 +8,10 @@ import { Tag, tags } from './tags';
 })
 export class PageService {
   
-  contentList: ContentMeta[] = contentIndex.reverse();
+  contentList: ContentMeta[] = contentIndex.reverse()
+    .map(e => {
+      return { id: Number(e.id), title: e.title, date: e.date, tags: e.tags.replace(" ","").split(","), category: e.category, type: e.type, path: e.path };
+    });
   tagsSelected: Map<string, boolean> = new Map();
   filteredContentList: ContentMeta[] = this.contentList;
 
