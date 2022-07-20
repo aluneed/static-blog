@@ -25,11 +25,10 @@
   box-shadow: 0 2px 5px 0 rgb(0 0 0 / 30%);
 
   background-color: #d2cfc7;
-
 }
 
 .main-container {
-  background-color: #dad8d3;
+  background-color: #d2cfc7;
   display: block;
 
   margin: 0 auto;
@@ -54,16 +53,30 @@
 }
 
 .side-column {
-  display: block;
-  position: fixed;
-  right: 0;
-  top: 120px;
+  /* display: block; */
+  
+  /* top: 120px */
+  /* position: fixed; */
+  /* right: 0; */
+  top: 16rem;
+  position: absolute;
+  left: 50%;
+  transform: translate(56rem); /* 横向 / 水平 位置控制 */
+
   overflow-x: hidden;
   padding: 16px;
 }
 
 .mat-sidenav-content {
   background-color: #dde5ed;
+  overflow-x: hidden;
+  min-height: 720px;
+}
+
+@media screen and (max-width: 1760px) {
+  .side-column {
+    display: none;
+  }
 }
 
 .toolbar a {

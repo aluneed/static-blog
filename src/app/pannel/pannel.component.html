@@ -1,20 +1,28 @@
 <div class="pannel">
   <div class="tags-filter" *ngIf="type()=='filter'">
-    <h1>filter</h1>
-    <button (click)="clearTagsFilter()">clear</button>
+    <!-- <div class="filter-header">
+      <h1>filter</h1>
+      <button (click)="clearTagsFilter()">clear</button>
+    </div> -->
+    
+    <mat-chip class="clear-button" (click)="clearTagsFilter()">
+      clear
+    </mat-chip>
+    <br>
+    <br>
     <mat-chip-list aria-label="tags" [multiple]="true" [selectable]="true">
-      <mat-chip *ngFor="let tag of tags"
+      <mat-chip class="tag-chip" *ngFor="let tag of tags"
       [selected]="tagsSelected.get(tag.name)"
       (click)="clickTag(tag)">
         {{tag.name}}
       </mat-chip>
     </mat-chip-list>
   </div>
-  <div *ngIf="type()=='index'">
+  <!-- <div *ngIf="type()=='index'">
     <h1>index</h1>
     false
-  </div>
-  <div *ngIf="type()=='default'">
+  </div> -->
+  <!-- <div *ngIf="type()=='default'">
     <h1>default pannel</h1>
-  </div>
+  </div> -->
 </div>
