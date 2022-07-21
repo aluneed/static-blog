@@ -13,7 +13,7 @@ export async function getPropFromMDFile(path: string): Promise<Map<string, strin
         if (line == "-->") {
             break;
         }
-        var tuple = line.replace(" ", "").split(":");
+        var tuple = line.replace(/: */, "::::").split("::::");  //only split with the first ":"
         if (tuple.length != 2) {
             continue;
         }
@@ -29,29 +29,40 @@ export async function generateIndex(path: string, destination: string) {
 
     for await (const entry of walk(path, { includeDirs: false, maxDepth: 1 })) {
         var path = entry.path
-        console.log(path);
         var map = await getPropFromMDFile(path);
-        console.log(map);
         metaInfoList.push(map);
-        console.log(Object.fromEntries(map));
     }
 
-    var orderedJsonStringList: string[] = metaInfoList.sort((a, b) => {
-        var dateA = a.get("date") == undefined ? "1800-01-01" : a.get("date");
-        var dateB = b.get("date") == undefined ? "1800-01-01" : b.get("date");
-        var dateNumA = datetime.parse(dateA, "yyyy-MM-dd").getTime();
-        var dateNumB = datetime.parse(dateB, "yyyy-MM-dd").getTime();
-        return dateNumA - dateNumB;
-    })
-    .map(e => Object.fromEntries(e))
-    .map(e => JSON.stringify(e));
+    var tagsCountingMap: Map<string, number> = new Map();
+    var orderedJsonStringList: string[] = metaInfoList
+        .sort((a, b) => {
+            var dateA = a.get("date") == undefined ? "1800-01-01" : a.get("date");
+            var dateB = b.get("date") == undefined ? "1800-01-01" : b.get("date");
+            var dateNumA = datetime.parse(dateA, "yyyy-MM-dd").getTime();
+            var dateNumB = datetime.parse(dateB, "yyyy-MM-dd").getTime();
+            return dateNumA - dateNumB;
+        })
+        .map(e => Object.fromEntries(e))
+        .map(e => {
+            e['tags'].replace(/, */g, ",").split(",").forEach(tag => {  //"g" in regex is a modifier. ref js
+                if (tagsCountingMap.has(tag)) {
+                    tagsCountingMap.set(tag, tagsCountingMap.get(tag)! + 1);
+                } else {
+                    tagsCountingMap.set(tag, 1);
+                }
+            })
+            return e;
+        })
+        .map(e => JSON.stringify(e));
+
+    console.log(tagsCountingMap);
 
     await Deno.writeTextFile(destination, "export const contentIndex = [\n");
     for(var i = 0; i < orderedJsonStringList.length; i++) {
         if (i < orderedJsonStringList.length - 1) {
             await Deno.writeTextFile(destination, "  " + orderedJsonStringList[i] + ",\n", {append: true});
         } else {
-            await Deno.writeTextFile(destination, "  " + orderedJsonStringList[i] + "\n]", { append: true});
+            await Deno.writeTextFile(destination, "  " + orderedJsonStringList[i] + "\n]", {append: true});
         }
     }
 

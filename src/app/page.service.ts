@@ -12,10 +12,10 @@ export class PageService {
     .map(e => {
       return { id: Number(e.id), title: e.title, date: e.date, tags: e.tags.replace(" ","").split(","), category: e.category, type: e.type, path: e.path };
     });
-  tagsSelected: Map<string, boolean> = new Map();
+  tagsSelected: Map<string, boolean> = new Map();  //todo: tags reverse index
   filteredContentList: ContentMeta[] = this.contentList;
 
-  indexBuffer: ContentMeta[] = [];
+  indexBuffer: ContentMeta[] = [];  //todo: rxjs subscribe
   pageIndexList: string[] = [];
 
   pageSize = 10;
@@ -28,21 +28,13 @@ export class PageService {
     
     // tags.forEach(tag => this.tagsSelected.set(tag.name, false));
     var tagsSelectedJsonString = sessionStorage.getItem("tagsSelected");
-    console.log(tagsSelectedJsonString);
     if (tagsSelectedJsonString == null || tagsSelectedJsonString == "{}") {
       tags.forEach(tag => this.tagsSelected.set(tag.name, false));
-      console.log("refresh" + " branch 1");
-      console.log(this.tagsSelected);
-      console.log(this.indexBuffer);
     } else {
-      console.log(this.tagsSelected);
       tagsSelectedJsonString.split(",").forEach(tupleString => {
         var tuple: string[] = tupleString.split(":");
         this.tagsSelected.set(tuple[0], tuple[1] == "true");
       })
-      console.log("refresh" + " branch 2");
-      console.log(this.tagsSelected);
-      console.log(this.indexBuffer);
     }
     this.updateFilteredContentList();
     var currentPage = sessionStorage.getItem("currentPage");
@@ -50,7 +42,6 @@ export class PageService {
 
     window.onbeforeunload = () => {
       this.saveTagsSession();
-      console.log("saved");
     }
   }
 

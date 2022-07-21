@@ -2,7 +2,7 @@
 id: 1
 title: static blog
 date: 2022-07-19
-tags: frontend, angular, material, blog, typescript
+tags: frontend, angular, material, blog, typescript, tag1
 category: categoryTest
 type: typeTest
 path: blog-on-deno
