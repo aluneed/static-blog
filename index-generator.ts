@@ -24,7 +24,7 @@ export async function getPropFromMDFile(path: string): Promise<Map<string, strin
     return map;
 }
 
-export async function generateIndex(path: string, destination: string) {
+export async function generateIndexAndCountTags(path: string, destination: string) {
     const metaInfoList: Map<string, string>[] = [];
 
     for await (const entry of walk(path, { includeDirs: false, maxDepth: 1 })) {
@@ -56,19 +56,36 @@ export async function generateIndex(path: string, destination: string) {
         .map(e => JSON.stringify(e));
 
     console.log(tagsCountingMap);
+    var tagsPath = destination + "/tags.ts";
+    await Deno.writeTextFile(tagsPath,
+        "export interface Tag {\n" +
+        "    name: string\n" +
+        "    count: number\n" +
+        "}\n\n" +
+        "export const tags: Tag[] = [\n"
+    );
+    for (const entry of tagsCountingMap.entries()) {
+        var obj = {"name": entry[0], "count": entry[1]}
+        // console.log(entry);
+        // console.log(obj);
+        console.log(JSON.stringify(obj));
+        await Deno.writeTextFile(tagsPath, "  " + JSON.stringify(obj) + ",\n", { append: true });
+    };
+    await Deno.writeTextFile(tagsPath, "]", { append: true });
 
-    await Deno.writeTextFile(destination, "export const contentIndex = [\n");
+    var contentIndexPath = destination + "/content-index.ts";
+    await Deno.writeTextFile(contentIndexPath, "export const contentIndex = [\n");
     for(var i = 0; i < orderedJsonStringList.length; i++) {
         if (i < orderedJsonStringList.length - 1) {
-            await Deno.writeTextFile(destination, "  " + orderedJsonStringList[i] + ",\n", {append: true});
+            await Deno.writeTextFile(contentIndexPath, "  " + orderedJsonStringList[i] + ",\n", {append: true});
         } else {
-            await Deno.writeTextFile(destination, "  " + orderedJsonStringList[i] + "\n]", {append: true});
+            await Deno.writeTextFile(contentIndexPath, "  " + orderedJsonStringList[i] + "\n]", {append: true});
         }
     }
 
     return metaInfoList;
 }
 
-generateIndex("./posts", "./src/app/content-index.ts")
+generateIndexAndCountTags("./posts", "./src/app")
 
 copy("./posts", "./src/assets/posts", {overwrite: true})

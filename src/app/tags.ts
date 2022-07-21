@@ -1,43 +1,15 @@
 export interface Tag {
-  name: string
-  count: number
+    name: string
+    count: number
 }
 
 export const tags: Tag[] = [
-  {
-    name: 'tag1',
-    count: 0
-  },
-  {
-    name: 'tag2',
-    count: 0
-  },
-  {
-    name: 'tag3',
-    count: 0
-  },
-  {
-    name: 'java',
-    count: 0
-  },
-  {
-    name: 'kotlin',
-    count: 0
-  },
-  {
-    name: 'scala',
-    count: 0
-  },
-  {
-    name: 'clojure',
-    count: 0
-  },
-  {
-    name: 'go',
-    count: 0
-  },
-  {
-    name: 'typescript',
-    count: 0
-  }
+  {"name":"tag1","count":3},
+  {"name":"tag2","count":2},
+  {"name":"blog","count":2},
+  {"name":"hello","count":1},
+  {"name":"frontend","count":1},
+  {"name":"angular","count":1},
+  {"name":"material","count":1},
+  {"name":"typescript","count":1},
 ]
