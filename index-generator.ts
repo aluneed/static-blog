@@ -29,6 +29,9 @@ export async function generateIndexAndCountTags(path: string, destination: strin
 
     for await (const entry of walk(path, { includeDirs: false, maxDepth: 1 })) {
         var path = entry.path
+        if (!path.match(".md")) {
+            continue;
+        }
         var map = await getPropFromMDFile(path);
         metaInfoList.push(map);
     }

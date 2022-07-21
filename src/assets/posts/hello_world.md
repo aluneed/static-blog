@@ -9,3 +9,6 @@ path: blog-on-deno
 -->
 
 This is my first blog post!
+
+![my waifu](test-picture.jpg "test")
+<!-- ![my waifu](/assets/posts/test-picture.jpg "test") -->
