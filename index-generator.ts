@@ -19,7 +19,7 @@ export async function getPropFromMDFile(path: string): Promise<Map<string, strin
         }
         map.set(tuple[0], tuple[1]);
     }
-    map.set("path", path);
+    map.set("path", path.replace(/\\/g, "/").split("/").pop()!);  //replace '\' for windows
     file.close();
     return map;
 }
@@ -69,9 +69,7 @@ export async function generateIndexAndCountTags(path: string, destination: strin
     );
     for (const entry of tagsCountingMap.entries()) {
         const obj = {"name": entry[0], "count": entry[1]}
-        // console.log(entry);
-        // console.log(obj);
-        console.log(JSON.stringify(obj));
+        // console.log(JSON.stringify(obj));
         await Deno.writeTextFile(tagsPath, "  " + JSON.stringify(obj) + ",\n", { append: true });
     };
     await Deno.writeTextFile(tagsPath, "]", { append: true });
@@ -89,6 +87,9 @@ export async function generateIndexAndCountTags(path: string, destination: strin
     return metaInfoList;
 }
 
-generateIndexAndCountTags("./posts", "./src/app")
+generateIndexAndCountTags("./posts", "./src/app");
 
-copy("./posts", "./src/assets/posts", {overwrite: true})
+if (!(Deno.args[0] == "build")) {
+    copy("./posts", "./src/assets/posts", {overwrite: true});
+}
+copy("./posts", "./dist/static-blog/assets/posts", {overwrite: true});

@@ -38,3 +38,11 @@ console.log()的表现似乎有些出人意料
 这样可以保证资源文件目录结构一致, 并且无需修改md文档中的url相对路径
 
 
+# md文档图片资源相对目录问题
+
+通过marked.js的baseUrl进行设置
+
+# todo
+
+rxjs subscribe  
+config service and configurations
