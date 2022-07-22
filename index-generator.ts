@@ -13,13 +13,13 @@ export async function getPropFromMDFile(path: string): Promise<Map<string, strin
         if (line == "-->") {
             break;
         }
-        var tuple = line.replace(/: */, "::::").split("::::");  //only split with the first ":"
+        const tuple = line.replace(/: */, "::::").split("::::");  //only split with the first ":"
         if (tuple.length != 2) {
             continue;
         }
         map.set(tuple[0], tuple[1]);
     }
-    map.set("path", path.split("/").pop());
+    map.set("path", path);
     file.close();
     return map;
 }
@@ -28,21 +28,21 @@ export async function generateIndexAndCountTags(path: string, destination: strin
     const metaInfoList: Map<string, string>[] = [];
 
     for await (const entry of walk(path, { includeDirs: false, maxDepth: 1 })) {
-        var path = entry.path
+        const path = entry.path
         if (!path.match(".md")) {
             continue;
         }
-        var map = await getPropFromMDFile(path);
+        const map = await getPropFromMDFile(path);
         metaInfoList.push(map);
     }
 
-    var tagsCountingMap: Map<string, number> = new Map();
-    var orderedJsonStringList: string[] = metaInfoList
+    const tagsCountingMap: Map<string, number> = new Map();
+    const orderedJsonStringList: string[] = metaInfoList
         .sort((a, b) => {
-            var dateA = a.get("date") == undefined ? "1800-01-01" : a.get("date");
-            var dateB = b.get("date") == undefined ? "1800-01-01" : b.get("date");
-            var dateNumA = datetime.parse(dateA, "yyyy-MM-dd").getTime();
-            var dateNumB = datetime.parse(dateB, "yyyy-MM-dd").getTime();
+            const dateA = a.get("date") == undefined ? "1800-01-01" : a.get("date");
+            const dateB = b.get("date") == undefined ? "1800-01-01" : b.get("date");
+            const dateNumA = datetime.parse(dateA, "yyyy-MM-dd").getTime();
+            const dateNumB = datetime.parse(dateB, "yyyy-MM-dd").getTime();
             return dateNumA - dateNumB;
         })
         .map(e => Object.fromEntries(e))
@@ -59,7 +59,7 @@ export async function generateIndexAndCountTags(path: string, destination: strin
         .map(e => JSON.stringify(e));
 
     console.log(tagsCountingMap);
-    var tagsPath = destination + "/tags.ts";
+    const tagsPath = destination + "/tags.ts";
     await Deno.writeTextFile(tagsPath,
         "export interface Tag {\n" +
         "    name: string\n" +
@@ -68,7 +68,7 @@ export async function generateIndexAndCountTags(path: string, destination: strin
         "export const tags: Tag[] = [\n"
     );
     for (const entry of tagsCountingMap.entries()) {
-        var obj = {"name": entry[0], "count": entry[1]}
+        const obj = {"name": entry[0], "count": entry[1]}
         // console.log(entry);
         // console.log(obj);
         console.log(JSON.stringify(obj));
@@ -76,9 +76,9 @@ export async function generateIndexAndCountTags(path: string, destination: strin
     };
     await Deno.writeTextFile(tagsPath, "]", { append: true });
 
-    var contentIndexPath = destination + "/content-index.ts";
+    const contentIndexPath = destination + "/content-index.ts";
     await Deno.writeTextFile(contentIndexPath, "export const contentIndex = [\n");
-    for(var i = 0; i < orderedJsonStringList.length; i++) {
+    for(let i = 0; i < orderedJsonStringList.length; i++) {
         if (i < orderedJsonStringList.length - 1) {
             await Deno.writeTextFile(contentIndexPath, "  " + orderedJsonStringList[i] + ",\n", {append: true});
         } else {

@@ -27,17 +27,17 @@ export class PageService {
     this.pageCount = Math.ceil(this.contentList.length / this.pageSize);
     
     // tags.forEach(tag => this.tagsSelected.set(tag.name, false));
-    var tagsSelectedJsonString = sessionStorage.getItem("tagsSelected");
+    let tagsSelectedJsonString = sessionStorage.getItem("tagsSelected");
     if (tagsSelectedJsonString == null || tagsSelectedJsonString == "{}") {
       tags.forEach(tag => this.tagsSelected.set(tag.name, false));
     } else {
       tagsSelectedJsonString.split(",").forEach(tupleString => {
-        var tuple: string[] = tupleString.split(":");
+        let tuple: string[] = tupleString.split(":");
         this.tagsSelected.set(tuple[0], tuple[1] == "true");
       })
     }
     this.updateFilteredContentList();
-    var currentPage = sessionStorage.getItem("currentPage");
+    let currentPage = sessionStorage.getItem("currentPage");
     this.setCurrentPage(currentPage == null ? 1 : Number(currentPage));
 
     window.onbeforeunload = () => {
@@ -80,12 +80,12 @@ export class PageService {
       this.pageIndexList.push(">>");
     }
 
-    var pageResult = this.getPageContentList(pageNum, this.pageSize);
-    for (var i = 0; i < pageResult.length; i++) {
+    let pageResult = this.getPageContentList(pageNum, this.pageSize);
+    for (let i = 0; i < pageResult.length; i++) {
       this.indexBuffer[i] = pageResult[i];
     }
-    var length = this.indexBuffer.length;
-    for (var i = pageResult.length; i < length; i++) {
+    let length = this.indexBuffer.length;
+    for (let i = pageResult.length; i < length; i++) {
       this.indexBuffer.pop();
     }
   }
@@ -99,7 +99,7 @@ export class PageService {
     this.tagsSelected.set(tag.name, false);
     
     //or filter 去掉最后一个选项后需要做特殊处理
-    // var tagCount = Array.from(this.tagsSelected.values()).filter(value => value).length;
+    // let tagCount = Array.from(this.tagsSelected.values()).filter(value => value).length;
     // if(tagCount == 0) {
       // this.clearTagsFilter();
     // } else {
@@ -109,7 +109,7 @@ export class PageService {
 
   updateFilteredContentList(): void {
 
-    var selectedTagList: string[] = Array.from(this.tagsSelected.entries())
+    let selectedTagList: string[] = Array.from(this.tagsSelected.entries())
       .filter(entry => entry[1] == true)
       .map(entry => entry[0])
 
@@ -133,7 +133,7 @@ export class PageService {
   }
 
   saveTagsSession(): void {
-    var tagsSelectedString = Array.from(this.tagsSelected.entries())
+    let tagsSelectedString = Array.from(this.tagsSelected.entries())
       .reduce((accumulated, entry) => {
         return accumulated + entry[0] + ":" + entry[1] + ",";
       }, "");
