@@ -30,13 +30,7 @@ deno run -A ./index-generator.ts
 ng build
 ```
 `deno run -A ./index-generator.ts` generates the index and count the tags in the md files  
-`ng build` is essential at the first time  
 <br>
-
-to update blog posts only, run
-```sh
-deno run -A ./index-generator.ts
-```
 
 the build result is in the `./dist`
 
