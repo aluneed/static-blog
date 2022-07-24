@@ -2,26 +2,89 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
 
-## Development server
+## How to Use
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```sh
+cd the/path/you/like
+```
+```sh
+git clone https://github.com/aluneed/static-blog.git
+cd ./static-blog
+```
+run npm install at the first time to use
+```sh
+npm install
+```
 
-## Code scaffolding
+copy the md files and image assets or some others into `./posts`  
+<br>  
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+run dev server locally on port 4200 or any other port, go `localhost:4200` to browse up the blog  
+```sh
+deno run -A ./index-generator.ts
+ng s --port 4200
+```
+build the static blog
+```sh
+deno run -A ./index-generator.ts
+ng build
+```
+`deno run -A ./index-generator.ts` generates the index and count the tags in the md files  
+`ng build` is essential at the first time  
+<br>
 
-## Build
+to update blog posts only, run
+```sh
+deno run -A ./index-generator.ts
+```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+the build result is in the `./dist`
 
-## Running unit tests
+host the directory(named `static-blog` by default) to an http server 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Environment Currently Used
 
-## Running end-to-end tests
+```
+> node --version
+v16.15.0
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+> npm --version
+8.11.0
 
-## Further help
+> deno --version
+deno 1.23.2 (release, aarch64-apple-darwin)
+v8 10.4.132.8
+typescript 4.7.2
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+> ng --version
+
+     _                      _                 ____ _     ___
+    / \   _ __   __ _ _   _| | __ _ _ __     / ___| |   |_ _|
+   / △ \ | '_ \ / _` | | | | |/ _` | '__|   | |   | |    | |
+  / ___ \| | | | (_| | |_| | | (_| | |      | |___| |___ | |
+ /_/   \_\_| |_|\__, |\__,_|_|\__,_|_|       \____|_____|___|
+                |___/
+
+
+Angular CLI: 13.3.7
+Node: 16.15.0
+Package Manager: npm 8.11.0
+OS: darwin arm64
+
+Angular: 13.3.10
+... animations, common, compiler, compiler-cli, core, forms
+... platform-browser, platform-browser-dynamic, router
+
+Package                         Version
+---------------------------------------------------------
+@angular-devkit/architect       0.1303.7
+@angular-devkit/build-angular   13.3.7
+@angular-devkit/core            13.3.7
+@angular-devkit/schematics      13.3.7
+@angular/cdk                    13.3.8
+@angular/cli                    13.3.7
+@angular/material               13.3.8
+@schematics/angular             13.3.7
+rxjs                            7.5.5
+typescript                      4.6.4
+```
