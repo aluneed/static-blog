@@ -31,3 +31,8 @@ a:active {
   color: #dde5ed;
 }
 
+img {
+  display: block;
+  max-width: 100%;
+  margin: 0 auto;
+}

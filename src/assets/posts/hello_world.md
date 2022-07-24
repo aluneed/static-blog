@@ -19,4 +19,4 @@ This is my first blog post!
 ![picture](./images/test-picture.jpg "pic")
 
 <!-- can not be parsed as relative path -->
-<img src="./images/test-picture.jpg">
+<!-- <img src="./images/test-picture.jpg"> -->

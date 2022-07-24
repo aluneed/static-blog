@@ -28,26 +28,50 @@ export class ContentContainerComponent implements OnInit {
     this.title = this.pageService.indexBuffer.find(e => e.path == this.path)?.title!;
     this.fullPath = "assets/posts/" + this.path;
 
+    // const renderer = new marked.Renderer();
+    // renderer.image = function(src: string, tkitle: string, alt: string) {
+    //   console.log('renderer calling', src, alt, title);
+    //   return `<img src="${src}" alt="${alt}" tilte="${title} style="max-width: 100%;">`;
+    // }
+
     // https://marked.js.org/using_advanced#options
     // Set options
     // `highlight` example uses https://highlightjs.org
-    marked.setOptions({
-      renderer: new marked.Renderer(),
-      // highlight: function(code, lang) {
-        // const hljs = require('highlight.js');
-        // const language = hljs.getLanguage(lang) ? lang : 'plaintext';
-        // return hljs.highlight(code, { language }).value;
-      // },
-      // langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
-      pedantic: false,
-      gfm: true,
-      breaks: false,
-      sanitize: false,
-      smartLists: true,
-      smartypants: false,
-      xhtml: false,
-      baseUrl: "assets/posts/"
-    });
+    // marked.setOptions({
+    //   renderer: renderer,
+    //   pedantic: false,
+    //   gfm: true,
+    //   breaks: false,
+    //   sanitize: false,
+    //   smartLists: true,
+    //   smartypants: false,
+    //   xhtml: false,
+    //   baseUrl: "assets/posts/"
+    // });
+
+    // const imageText = "![alt](images/test-images.jpg \"title\")";
+    // console.log("original");
+    // console.log(marked.parse(imageText));
+    marked.use(
+      {
+        pedantic: false,
+        gfm: true,
+        breaks: false,
+        sanitize: false,
+        smartLists: true,
+        smartypants: false,
+        xhtml: false,
+        baseUrl: "assets/posts/",
+        renderer: {  //no use
+          image(src: string, title: string, alt: string) {
+            console.log('renderer calling', src, alt, title);
+            return `<img src="${src}" alt="${alt}" tilte="${title} style="max-width: 100%;">`;
+          }
+        }
+      }
+    )
+    // console.log("changed")
+    // console.log(marked.parse(imageText));  //conflicts when both 'baseUrl' and 'renderer image()' existing  
   }
 
   path:string | null = "";
