@@ -46,3 +46,8 @@ console.log()的表现似乎有些出人意料
 
 rxjs subscribe  
 config service and configurations
+
+
+# github pages 404 问题
+
+https://www.jianshu.com/p/2c017c998501
