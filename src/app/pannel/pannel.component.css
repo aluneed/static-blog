@@ -15,7 +15,7 @@
   overflow: hidden;
   min-width: 0;
 
-  font-family: "Cascadia Code Extralight", Roboto, "Helvetica Neue", sans-serif;
+  font-family: 'Cascadia Code Extralight', 'Source Han Sans Light', 'Noto Sans SC', 'Noto Sans JP';
 }
 
 .filter-header {

@@ -3,7 +3,7 @@
 html, body { height: 100%; font-size: 62.5%;}
 body { 
   margin: 0; 
-  font-family: "Cascadia Code Extralight", Roboto, "Helvetica Neue", sans-serif; 
+  font-family: 'Cascadia Code Extralight', 'Source Han Sans Light', 'Noto Sans SC', 'Noto Sans JP';
   /* background-color: #92aca0;  */
   background-color: #dde5ed; 
 
@@ -44,5 +44,21 @@ h2 {
   color: #3e5d58;
 
   /* will be rewrited by marked.js */
-  font-family: 'Cascadia Code Extralight', 'Source Han Sans';
+  font-family: 'Cascadia Code Extralight', 'Source Han Sans Light', 'Noto Sans SC', 'Noto Sans JP';
+}
+
+
+@font-face {
+  font-family: 'Cascadia Code Extralight';
+  src: url('/assets/fonts/CascadiaCode-ExtraLight.otf');
+}
+
+@font-face {
+  font-family: 'Source Han Sans JP Light';
+  src: url('/assets/fonts/SourceHanSansJP-Light.otf');
+}
+
+@font-face {
+  font-family: 'Noto Sans JP Light';
+  src: url('/assets/fonts/NotoSansJP-Light.otf');
 }

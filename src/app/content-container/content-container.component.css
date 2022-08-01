@@ -18,7 +18,7 @@
   display: block;
   font-size: 1.6rem;
   line-height: 2;
-  font-family: 'Cascadia Code Extralight', 'Source Han Sans Light';
+  font-family: 'Cascadia Code Extralight', 'Source Han Sans Light', 'Noto Sans SC', 'Noto Sans JP';
   min-width: 32rem;
   padding: 0rem 12rem 12rem 12rem;
 }
