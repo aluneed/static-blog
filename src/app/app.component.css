@@ -11,6 +11,9 @@
   z-index: 10;
 
   box-shadow: 0 2px 5px #0000004d;
+
+  /* for mobile devices */
+  min-height: 64px;  
 }
 
 .side-nav {
@@ -26,6 +29,10 @@
 
   background-color: #d2cfc7;
 }
+
+/* .mat-drawer-container {
+  background-color: #d2cfc7;
+} */
 
 .main-container {
   background-color: #d2cfc7;

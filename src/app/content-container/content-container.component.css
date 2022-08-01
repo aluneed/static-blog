@@ -1,16 +1,24 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300&display=swap'); */
+
 .title {
   display: block;
   text-align: center;
 
-  padding: 4rem 8rem 8rem 8rem;
-
+  padding: 4rem 0 8rem 0;
   font-size: 3.2rem;
-  font-family: 'Cascadia Code Extralight';
+
   color: #3e5d58;
 }
 
 .content {
-  display: block;
+  /* padding: 0rem 12rem 12rem 12rem; */
+}
 
+.container {
+  display: block;
+  font-size: 1.6rem;
+  line-height: 2;
+  font-family: 'Cascadia Code Extralight', 'Source Han Sans Light';
+  min-width: 32rem;
   padding: 0rem 12rem 12rem 12rem;
 }

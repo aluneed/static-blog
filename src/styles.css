@@ -33,6 +33,16 @@ a:active {
 
 img {
   display: block;
-  max-width: 100%;
-  margin: 0 auto;
+  max-width: 95%;
+  margin: 3.2rem auto;
+}
+
+h2 {
+  /* padding: 4rem 8rem 8rem 8rem; */
+
+  font-size: 3.2rem;
+  color: #3e5d58;
+
+  /* will be rewrited by marked.js */
+  font-family: 'Cascadia Code Extralight', 'Source Han Sans';
 }
