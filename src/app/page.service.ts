@@ -10,7 +10,7 @@ export class PageService {
   
   contentList: ContentMeta[] = contentIndex.reverse()
     .map(e => {
-      return { id: Number(e.id), title: e.title, date: e.date, tags: e.tags.replace(" ","").split(","), category: e.category, type: e.type, path: e.path };
+      return { id: Number(e.id), title: e.title, date: e.date, tags: e.tags.split(/, */g), category: e.category, type: e.type, path: e.path };
     });
   tagsSelected: Map<string, boolean> = new Map();  //todo: tags reverse index
   filteredContentList: ContentMeta[] = this.contentList;
