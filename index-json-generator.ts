@@ -82,9 +82,8 @@ export async function generateIndexAndCountTags(postPath: string, jsonDestinatio
     return metaInfoList;
 }
 
-const sourcePath: string = Deno.args[0];  //"./posts"
+const sourcePath: string = Deno.args[0];  //"./posts"||"./docs"
 const destinationPath: string = Deno.args[1];  //"./src/assets"
-const directoryName: string = sourcePath.replace(/\\/g, "/").split("/").pop()!;
 
 generateIndexAndCountTags(sourcePath, destinationPath);
-copy(sourcePath, destinationPath + "/" + directoryName, {overwrite: true});
+copy(sourcePath, destinationPath + "/posts", {overwrite: true});
