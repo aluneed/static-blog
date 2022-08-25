@@ -16,17 +16,28 @@ run npm install at the first time to use
 npm install
 ```
 
-copy the md files and image assets or some others into `./posts`  
+copy the markdown files and image assets or some others into `./posts`  
+every markdown blog file need to contain an html comment block to introduce some metainfo
+```html
+<!--meta
+id: number
+title: string
+date: yyyy-MM-dd
+tags: tag1, tag2, tagsSeparatedByComma
+category: string
+type: string
+meta-->
+```
 <br>  
 
 run dev server locally on port 4200 or any other port, go `localhost:4200` to browse up the blog  
 ```sh
-deno run -A ./index-generator.ts
+deno run -A ./index-json-generator.ts ./posts ./src/assets
 ng s --port 4200
 ```
 build the static blog
 ```sh
-deno run -A ./index-generator.ts
+deno run -A ./index-json-generator.ts ./posts ./src/assets
 ng build
 ```
 `deno run -A ./index-generator.ts` generates the index and count the tags in the md files  

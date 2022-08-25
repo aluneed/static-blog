@@ -11,7 +11,7 @@
     <br>
     <br>
     <mat-chip-list aria-label="tags" [multiple]="true" [selectable]="true">
-      <mat-chip class="tag-chip" *ngFor="let tag of tags"
+      <mat-chip class="tag-chip" *ngFor="let tag of this.pageService.tags"
       [selected]="tagsSelected.get(tag.name)"
       (click)="clickTag(tag)">
         {{tag.name}}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PageService } from '../page.service';
-import { Tag, tags } from '../tags';
+import { Tag } from '../Tag';
 
 @Component({
   selector: 'app-pannel',
@@ -11,13 +11,11 @@ import { Tag, tags } from '../tags';
 export class PannelComponent implements OnInit {
 
   constructor(
-    private pageService: PageService,
+    public pageService: PageService,
     private route: ActivatedRoute
   ) { }
 
   flag: boolean = true;
-
-  tags: Tag[] = tags;
 
   tagsSelected: Map<string, boolean> = this.pageService.tagsSelected;
 

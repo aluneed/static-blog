@@ -19,7 +19,7 @@ export class ContentListComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  jumpPage(page: String) {
+  jumpPage(page: string) {
     this.pageService.jumpPage(page);
   }
 

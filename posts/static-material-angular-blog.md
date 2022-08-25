@@ -1,4 +1,4 @@
-<!--
+<!--meta
 id: 1
 title: static blog
 date: 2022-07-19
@@ -7,7 +7,7 @@ category: categoryTest
 type: typeTest
 path: blog-on-deno
 abstract: testAbstract
--->
+meta-->
 
 # 问题
 

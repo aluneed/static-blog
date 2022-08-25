@@ -1,17 +1,16 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { contentIndex } from './content-index';
 import { ContentMeta } from './ContentMeta';
-import { Tag, tags } from './tags';
+import { Tag } from './Tag';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PageService {
-  
-  contentList: ContentMeta[] = contentIndex.reverse()
-    .map(e => {
-      return { id: Number(e.id), title: e.title, date: e.date, tags: e.tags.split(/, */g), category: e.category, type: e.type, path: e.path };
-    });
+
+  contentList: ContentMeta[] = [];
+  tags: Tag[] = [];
+
   tagsSelected: Map<string, boolean> = new Map();  //todo: tags reverse index
   filteredContentList: ContentMeta[] = this.contentList;
 
@@ -22,30 +21,46 @@ export class PageService {
   pageNum = 1;
 
   pageCount = 1;
-  
-  constructor() {
-    this.pageCount = Math.ceil(this.contentList.length / this.pageSize);
-    
-    // tags.forEach(tag => this.tagsSelected.set(tag.name, false));
-    let tagsSelectedJsonString = sessionStorage.getItem("tagsSelected");
-    if (tagsSelectedJsonString == null || tagsSelectedJsonString == "{}") {
-      tags.forEach(tag => this.tagsSelected.set(tag.name, false));
-    } else {
-      tagsSelectedJsonString.split(",").forEach(tupleString => {
-        let tuple: string[] = tupleString.split(":");
-        this.tagsSelected.set(tuple[0], tuple[1] == "true");
-      })
-    }
-    this.updateFilteredContentList();
+
+  constructor(public http: HttpClient) {
+
+    this.http.get("assets/index.json", {responseType: "json"})
+      .subscribe(result => {
+        
+        this.contentList = (result as ContentMeta[]).reverse();
+        this.pageCount = Math.ceil(this.contentList.length / this.pageSize);
+
+        let tagsSelectedJsonString = sessionStorage.getItem("tagsSelected");
+          this.http.get("assets/tags.json")
+            .subscribe(result => {
+              (<Tag[]> result).forEach(tag => {
+                this.tags.push(tag);
+                if (tagsSelectedJsonString == null || tagsSelectedJsonString == "{}") {
+                  this.tagsSelected.set(tag.name, false);
+                } else {
+                  tagsSelectedJsonString.split(",").forEach(tupleString => {
+                    let tuple: string[] = tupleString.split(":");
+                    this.tagsSelected.set(tuple[0], tuple[1] == "true");
+                  })
+                }
+                this.updateFilteredContentList();
+              })
+              // let tags: Tag[] = result as Tag[];
+              console.log(this.tags);
+              this.updateFilteredContentList();
+            })
+      });
+
     let currentPage = sessionStorage.getItem("currentPage");
     this.setCurrentPage(currentPage == null ? 1 : Number(currentPage));
 
     window.onbeforeunload = () => {
       this.saveTagsSession();
     }
+
   }
 
-  jumpPage(page: String) {
+  jumpPage(page: string) {
     if (page == "<<") {
       this.setCurrentPage(1);
     } else if (page == "<") {
