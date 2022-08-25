@@ -40,12 +40,14 @@ build the static blog
 deno run -A ./index-json-generator.ts ./posts ./src/assets
 ng build
 ```
-`deno run -A ./index-generator.ts` generates the index and count the tags in the md files  
+`deno run -A ./index-json-generator.ts ./posts ./src/assets` generates the index and count the tags in the md files  
 <br>
 
-the build result is in the `./dist`
+the build result is in the `./dist`  
 
-host the directory(named `static-blog` by default) to an http server 
+host the directory(named `static-blog` by default) to an http server  
+
+for github-pages, you need to copy `index.html` to `404.html` in the root path  
 
 ## Environment Currently Used
 

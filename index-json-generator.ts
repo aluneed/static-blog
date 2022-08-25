@@ -88,4 +88,3 @@ const directoryName: string = sourcePath.replace(/\\/g, "/").split("/").pop()!;
 
 generateIndexAndCountTags(sourcePath, destinationPath);
 copy(sourcePath, destinationPath + "/" + directoryName, {overwrite: true});
-copy(sourcePath, "./dist/static-blog/assets/" + directoryName, {overwrite: true});
