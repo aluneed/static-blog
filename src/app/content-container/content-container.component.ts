@@ -75,7 +75,7 @@ export class ContentContainerComponent implements OnInit {
   }
 
   path:string | null = "";
-  content: string = "# content not found";
+  content: string = "loading";
   title: string= "title";
   fullPath: string = "";
 
